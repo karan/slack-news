@@ -1,0 +1,6 @@
+{
+  "name": "slack-hn",
+  "description": "Read Hacker News right from Slack.",
+  "repository": "https://github.com/karan/slack-hn",
+  "keywords": ["node", "express", "slack", "hackernews"]
+}
