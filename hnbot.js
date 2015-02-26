@@ -1,9 +1,10 @@
 var request = require('request');
 var async = require('async');
+var https = require('https');
+
+var WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL;
 
 module.exports = function (req, res, next) {
-
-  var POST_LIMIT = 20;
 
   request('http://node-hnapi.herokuapp.com/news', function(err, response, items) {
     if (err || response.statusCode != 200) {
@@ -12,7 +13,7 @@ module.exports = function (req, res, next) {
 
     items = JSON.parse(items);
 
-    var botPayload = '*Current Hacker News homepage:*\n'
+    var botPayload = 'Current Hacker News homepage:\n'
 
     var index = 0;
     async.forEach(items, function(item, cb) {
@@ -23,11 +24,22 @@ module.exports = function (req, res, next) {
       index++;
       cb();
     }, function(err) {
-      return res.status(200).send(JSON.stringify({
-        'text': botPayload,
-        'username': 'slackbot',
-        'mrkdwn': true
-      }));
+
+      var payload = {
+        text: botPayload,
+        username: 'HackerNews',
+        channel: req.query.channel_id
+      };
+
+      request.post({
+        url: WEBHOOK_URL,
+        body: JSON.stringify(payload)
+
+      }, function(err, resp, data) {
+        if (err) {
+          return res.status(500).end();
+        }
+      });
     });
   });
 }
