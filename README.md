@@ -7,6 +7,8 @@ Read Hacker News right from Slack just typing `/hn`.
 
 ## Installation
 
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/karan/slack-hn/tree/master)
+
 - Go to your channel
 - Click on **Configure Integrations**.
 - Scroll all the way down to **DIY Integrations & Customizations** section.
