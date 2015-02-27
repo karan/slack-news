@@ -50,6 +50,8 @@ All other settings can be set on your own discretion.
 
 Although the code is hosted at `http://slack-hn.herokuapp.com/`, you are free to setup your own instance.
 
+Make sure to change the **Slash Command** URL to whatever your URL is.
+
 ##### Heroku
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/karan/slack-hn/tree/master)
