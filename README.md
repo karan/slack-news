@@ -3,7 +3,11 @@ slack-hn
 
 Read Hacker News right from Slack just typing `/hn`.
 
-////GIF/////
+![](http://i.imgur.com/kpdF7SR.gif)
+
+## Usage
+
+From any Slack channel, just type `/hn`. The posts will be shown on the same channel.
 
 ## Installation
 
