@@ -1,15 +1,57 @@
-slack-hn
+slack-news
 ========
 
-Read Hacker News right from Slack just typing `/hn`.
+Read news from multiple sources within Slack by just typing `/news`.
 
 ![](http://i.imgur.com/kpdF7SR.gif)
 
 ## Usage
 
-From any Slack channel, just type `/hn`. The posts will be shown on the same channel.
+From any Slack channel, just type `/news [source]`. The news will be shown on the same channel.
+
+
+#### Default sources
+
+1. Hackers News (`\news hn`)
+2. Product Hunt (`\news ph`)
 
 ## Installation
+
+### Setup your own server
+
+Although the code is hosted at `http://slack-news.herokuapp.com/`, you should setup your own instance.
+
+Make sure to change the **Slash Command** URL to whatever your URL is.
+
+##### Heroku
+
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/karan/slack-news/tree/master)
+
+And then:
+
+```bash
+$ heroku config:set SLACK_WEBHOOK_URL=<URL>
+$ heroku config:set PH_TOKEN=<PRODUCTHUNT TOKEN>
+```
+
+##### Other servers
+
+```bash
+$ git clone git@github.com:karan/slack-news.git
+$ cd slack-news
+$ npm install
+$ export SLACK_WEBHOOK_URL=<URL>
+$ export PH_TOKEN=<PRODUCTHUNT TOKEN>
+$ node app.js
+```
+
+##### Notes
+
+1. `SLACK_WEBHOOK_URL` will be found after setting up Incoming WebHooks. (See below)
+2. Retrieve Product Hunt token from https://www.producthunt.com/v1/oauth/applications
+3. Instead of setting environment variables, you can also setup a `config.js` file (see `config_sample.js`).
+
+### Setup Integration
 
 - Go to your channel
 - Click on **Configure Integrations**.
@@ -20,7 +62,7 @@ From any Slack channel, just type `/hn`. The posts will be shown on the same cha
 - Click on **Add** next to **Slash Commands**.
 
   - Command: `/hn`
-  - URL: `http://slack-hn.herokuapp.com/hn`
+  - URL: `http://YOUR-URL.com/news`
   - Method: `GET`
 
   ![](http://i.imgur.com/vNL3MCk.png)
@@ -29,51 +71,15 @@ All other settings can be set on your own discretion.
 
 #### Set up a new incoming webhook
 
-- Click on **Add** next to **Incoming WebHooks**.
+Click on **Add** next to **Incoming WebHooks**.
 
   - Choose a channel to integrate with (this doesn't matter -- it'll always respond to the channel you called it from)
   - Note the new Webhook URL.
 
   ![](http://i.imgur.com/JRJ92xj.png)
 
-- Set a new environment variable called `SLACK_WEBHOOK_URL`.
-
-  ```bash
-  # Unux systems (AWS etc)
-  $ export SLACK_WEBHOOK_URL=<URL>
-
-  # Heroku
-  $ heroku config:set SLACK_WEBHOOK_URL=<URL>
-  ```
-
-#### (Optional) Setup your own server
-
-Although the code is hosted at `http://slack-hn.herokuapp.com/`, you are free to setup your own instance.
-
-Make sure to change the **Slash Command** URL to whatever your URL is.
-
-##### Heroku
-
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/karan/slack-hn/tree/master)
-
-And then:
-
-```bash
-$ heroku config:set SLACK_WEBHOOK_URL=<URL>
-```
-
-##### Other servers
-
-```bash
-$ git clone git@github.com:karan/slack-hn.git
-$ cd slack-hn
-$ npm install
-$ export SLACK_WEBHOOK_URL=<URL>
-$ node app.js
-```
-
 ## Contributing
 
 - Please use the [issue tracker]() to report any bugs or file feature requests.
 
-- PRs are welcome.
+- PRs to add new sources are welcome. Please make sure to test each source you add and try to follow the coding style.
