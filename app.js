@@ -34,6 +34,7 @@ app.get('/news', function(req, res, next) {
     }
 
     payload.channel = req.query.channel_id;
+    payload.icon_url = 'http://i.imgur.com/YaC3BuK.jpg';
     
     request.post({
       url: config.SLACK_WEBHOOK_URL,

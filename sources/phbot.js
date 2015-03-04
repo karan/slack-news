@@ -27,10 +27,11 @@ module.exports = {
 
       var index = 0;
       async.forEach(items, function(item, cb) {
-        botPayload += '<%url%|%rank%. %title%>\n'
+        botPayload += '<%url%|%rank%. %title%> (%tagline%)\n'
                         .replace('%url%', item.discussion_url)
                         .replace('%rank%', index + 1)
-                        .replace('%title%', item.name);
+                        .replace('%title%', item.name)
+                        .replace('%tagline%', item.tagline);
         index++;
         cb();
       }, function(err) {
