@@ -23,7 +23,7 @@ module.exports = {
       var index = 0;
       async.forEach(items, function(item, cb) {
         var url = item.url;
-        if (item.url.startsWith('http')) {
+        if (item.url.indexOf('http') !== 0) {
           url = BASE_URL + item.url
         }
 
