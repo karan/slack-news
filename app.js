@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var hnbot = require('./hnbot');
+var hnbot = require('./sources/hnbot');
+var phbot = require('./sources/phbot');
  
 var app = express();
 var port = process.env.PORT || 3000;
@@ -12,6 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', function (req, res) { res.status(200).send('Hello world!') });
 
 app.get('/hn', hnbot);
+app.get('/ph', phbot);
  
 // error handler
 app.use(function (err, req, res, next) {
@@ -20,5 +22,5 @@ app.use(function (err, req, res, next) {
 });
  
 app.listen(port, function () {
-  console.log('Slack HN bot listening on port ' + port);
+  console.log('Slack News bot listening on port ' + port);
 });
