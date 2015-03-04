@@ -2,52 +2,48 @@ var request = require('request');
 var async = require('async');
 var https = require('https');
 
-var WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL;
+var config = require('./../config');
 
-module.exports = function (req, res, next) {
 
-  request({
-    url: 'https://api.producthunt.com/v1/posts',
-    headers: {
-      'Authorization': 'Bearer' + process.env.PH_TOKEN
-    }
-  }, function(err, response, items) {
-    if (err || response.statusCode != 200) {
-      return res.status(500).end();
-    }
+module.exports = {
 
-    items = JSON.parse(items).posts;
+  aliases: ['ph', 'producthunt', 'product hunt'],
 
-    var botPayload = 'Current Product Hunt homepage:\n'
+  pingAndSend: function (callback) {
 
-    var index = 0;
-    async.forEach(items, function(item, cb) {
-      console.log(item);
-      botPayload += '<%url%|%rank%. %title%>\n'
-                      .replace('%url%', item.discussion_url)
-                      .replace('%rank%', index + 1)
-                      .replace('%title%', item.name);
-      index++;
-      cb();
-    }, function(err) {
+    request({
+      url: 'https://api.producthunt.com/v1/posts',
+      headers: {
+        'Authorization': 'Bearer ' + config.PH_TOKEN
+      }
+    }, function(err, response, items) {
+      if (err || response.statusCode != 200) {
+        callback(err);
+      }
 
-      console.log(payload);
+      items = JSON.parse(items).posts;
 
-      var payload = {
-        text: botPayload,
-        username: 'ProductHunt',
-        channel: req.query.channel_id
-      };
+      var botPayload = 'Current Product Hunt homepage:\n'
 
-      request.post({
-        url: WEBHOOK_URL,
-        body: JSON.stringify(payload)
+      var index = 0;
+      async.forEach(items, function(item, cb) {
+        botPayload += '<%url%|%rank%. %title%>\n'
+                        .replace('%url%', item.discussion_url)
+                        .replace('%rank%', index + 1)
+                        .replace('%title%', item.name);
+        index++;
+        cb();
+      }, function(err) {
 
-      }, function(err, resp, data) {
-        if (err) {
-          return res.status(500).end();
-        }
+        var payload = {
+          text: botPayload,
+          username: 'ProductHunt'
+        };
+
+        callback(null, payload);
       });
     });
-  });
+
+  }
+
 }
