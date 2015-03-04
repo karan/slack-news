@@ -49,7 +49,6 @@ $ node app.js
 
 1. `SLACK_WEBHOOK_URL` will be found after setting up Incoming WebHooks. (See below)
 2. Retrieve Product Hunt token from https://www.producthunt.com/v1/oauth/applications
-3. Instead of setting environment variables, you can also setup a `config.js` file (see `config_sample.js`).
 
 ### Setup Integration
 
