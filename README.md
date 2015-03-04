@@ -3,7 +3,7 @@ slack-news
 
 Read news from multiple sources within Slack by just typing `/news`.
 
-![](http://i.imgur.com/kpdF7SR.gif)
+![](http://i.imgur.com/o92cNNJ.gif)
 
 ## Usage
 
@@ -18,8 +18,6 @@ From any Slack channel, just type `/news [source]`. The news will be shown on th
 ## Installation
 
 ### Setup your own server
-
-Although the code is hosted at `http://slack-news.herokuapp.com/`, you should setup your own instance.
 
 Make sure to change the **Slash Command** URL to whatever your URL is.
 
