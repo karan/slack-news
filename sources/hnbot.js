@@ -2,6 +2,8 @@ var request = require('request');
 var async = require('async');
 var https = require('https');
 
+var BASE_URL = 'https://news.ycombinator.com/';
+
 
 module.exports = {
 
@@ -20,8 +22,13 @@ module.exports = {
 
       var index = 0;
       async.forEach(items, function(item, cb) {
+        var url = item.url;
+        if (item.url.startsWith('http')) {
+          url = BASE_URL + item.url
+        }
+
         botPayload += '<%url%|%rank%. %title%>\n'
-                        .replace('%url%', item.url)
+                        .replace('%url%', url)
                         .replace('%rank%', index + 1)
                         .replace('%title%', item.title);
         index++;
