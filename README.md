@@ -3,7 +3,7 @@ slack-news
 
 Read news from multiple sources within Slack by just typing `/news`.
 
-![](http://i.imgur.com/o92cNNJ.gif)
+![](http://i.imgur.com/9OU1ICP.gif)
 
 ## Usage
 
