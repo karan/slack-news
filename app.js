@@ -21,11 +21,9 @@ app.get('/', function (req, res) { res.status(200).send('Hello world!') });
 app.get('/news', function(req, res, next) {
   var query = req.query.text.toLowerCase();
 
-  var bot;
+  var bot = hnbot;
 
-  if (hnbot.aliases.indexOf(query) > -1) {
-    bot = hnbot;
-  } else if (phbot.aliases.indexOf(query) > -1) {
+  if (phbot.aliases.indexOf(query) > -1) {
     bot = phbot;
   }
 
