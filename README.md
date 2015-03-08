@@ -12,8 +12,8 @@ From any Slack channel, just type `/news [source]`. The news will be shown on th
 
 #### Default sources
 
-1. Hackers News (`\news hn`)
-2. Product Hunt (`\news ph`)
+1. Hackers News (`/news hn`)
+2. Product Hunt (`/news ph`)
 
 ## Installation
 
@@ -58,7 +58,7 @@ $ node app.js
 
 - Click on **Add** next to **Slash Commands**.
 
-  - Command: `/hn`
+  - Command: `/news`
   - URL: `http://YOUR-URL.com/news`
   - Method: `GET`
 
