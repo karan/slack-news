@@ -2,7 +2,7 @@ var request = require('request');
 var async = require('async');
 var https = require('https');
 
-var BASE_URL = 'https://news.ycombinator.com/';
+var BASE_URL = 'https://news.google.com/news?pz=1&zx=gpf74cp73x84/';
 
 
 module.exports = {
