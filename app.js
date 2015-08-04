@@ -19,7 +19,7 @@ app.get('/', function (req, res) { res.status(200).send('Hello world!') });
 
 
 app.get('/news', function(req, res, next) {
-  var query = req.query.text.toLowerCase();
+  var query = req.query.text ? req.query.text.toLowerCase() : null;
 
   var bot = hnbot;
 
