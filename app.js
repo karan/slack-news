@@ -36,7 +36,9 @@ app.get('/news', function(req, res, next) {
 
   bot.pingAndSend(function(err, payload) {
 
-    if (err) {
+    if (err || !payload) {
+      console.warn('Error fetching data : ');
+      console.log(err);
       return res.status(500).end();
     }
 
