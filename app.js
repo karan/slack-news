@@ -19,7 +19,14 @@ app.get('/', function (req, res) { res.status(200).send('Hello world!') });
 
 
 app.get('/news', function(req, res, next) {
-  var query = req.query.text.toLowerCase();
+  
+  if (!config.SLACK_WEBHOOK_URL)
+  {
+    res.status(500);
+    res.send("Please configure your Slack webhook Url first");
+    return;
+  }
+  var query = req.query.text ? req.query.text.toLowerCase() : null;
 
   var bot = hnbot;
 
@@ -29,7 +36,9 @@ app.get('/news', function(req, res, next) {
 
   bot.pingAndSend(function(err, payload) {
 
-    if (err) {
+    if (err || !payload) {
+      console.warn('Error fetching data : ');
+      console.log(err);
       return res.status(500).end();
     }
 
@@ -44,6 +53,7 @@ app.get('/news', function(req, res, next) {
       if (err) {
         return res.status(500).end();
       }
+      res.send('♡');
     });
   });
 

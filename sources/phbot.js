@@ -18,7 +18,7 @@ module.exports = {
       }
     }, function(err, response, items) {
       if (err || response.statusCode != 200) {
-        callback(err);
+        return callback(err || 'Invalid query ['+ response.statusCode+'] — '+response.body+']');
       }
 
       items = JSON.parse(items).posts;
