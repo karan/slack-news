@@ -19,6 +19,13 @@ app.get('/', function (req, res) { res.status(200).send('Hello world!') });
 
 
 app.get('/news', function(req, res, next) {
+  
+  if (!config.SLACK_WEBHOOK_URL)
+  {
+    res.status(500);
+    res.send("Please configure your Slack webhook Url first");
+    return;
+  }
   var query = req.query.text ? req.query.text.toLowerCase() : null;
 
   var bot = hnbot;
